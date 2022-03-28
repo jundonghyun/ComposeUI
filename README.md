@@ -22,3 +22,39 @@ BoxWithConstraints(
 
 위 예시처럼 `minWidth`를 기준으로 크기를 비교하는것과 `maxWidth`, `minHeight`, `maxHeight`로도 비교할 수 있다.
 ![Untitled](https://user-images.githubusercontent.com/70741953/160308059-750f1633-7e9b-4c21-8508-5dbe3ac8a7a7.png)
+
+
+### Compose Text
+
+`buildAnnotatedString`을 이용하면 글자중 단어나 한글자씩 색깔이나 크기등을 조절할 수 있다.
+```kotlin
+Text(
+            buildAnnotatedString {
+                withStyle(
+                    style = ParagraphStyle(
+                        lineHeight = 30.sp
+                    )
+                ){
+                    withStyle(
+                        style = SpanStyle(
+                            background = Color.Yellow
+                        )
+                    ){
+                        append("과실이 싹이 주며,")
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Blue,
+                                fontSize = 30.sp
+                            )
+                        )
+                        {
+                            append("청춘")
+                        }
+                        append("이것이다. 소리다. 이것은 이상을 그러므로 소금이라" +
+                                "그림자는 원대하고, 유소년에게서 과실이 뿐이다")
+                    }
+                }
+            }
+        )
+```
+![image](https://user-images.githubusercontent.com/70741953/160310831-7157902e-a28b-4b17-aa6e-52196afc7d15.png)
