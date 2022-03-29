@@ -58,3 +58,67 @@ Text(
         )
 ```
 ![image](https://user-images.githubusercontent.com/70741953/160310914-b7111fc3-ca5b-45d3-abc0-f8f214146516.png)
+
+### Compose SnackBar
+
+스낵바 생성하는 방법
+
+```kotlin
+val snackbarHostState = remember { SnackbarHostState() } //스낵바의 상태를 기억하고 있음
+val coroutineScope = rememberCoroutineScope() //스낵바가 쓰레드로 동작할때 코루틴을 사용하면
+																							//다른 쓰레드를 건드리지않아도 개별적으로 실행가능
+
+coroutineScope.launch{
+	snackbarHostState.showSnackBar(
+			"스낵바에 들어갈 메시지"
+			"확인버튼 등"
+			SnackBarDuration.Short
+	)
+}
+
+SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
+```
+
+위의 예시는 간단하게 스낵바를 생성하는 방법이고 아래의 예시는 스낵바의 상태를 이용해서 버튼의 색상을 변경할 수 있는 예제이다
+
+```kotlin
+//먼저 스낵바의 상태를 불러오기 위해 SnackBarData를 불러온다
+val buttonColor: (SnackbarData?) -> Color = { snackbarData ->
+        if(snackbarData != null){
+            Color.Black
+        }
+        else{
+            Color.Blue
+        }
+    }
+
+Button(
+	colors = ButtonDefaults.buttonColors(
+  backgroundColor = buttonColor(snackbarHostState.currentSnackbarData), //버튼의 색상을 스낵바가 변경될때 정해진 색상으로 변경되도록 
+	contentColor = Color.White //버튼 텍스트의 색상
+	),
+		onClick = {
+		Log.d("Tag", "스낵바 생성")
+		if(snackbarHostState.currentSnackbarData != null){ //스낵바데이터가 null이 아니면 스낵바가 있는 경우
+			Log.d("Tag", "이미 스낵바가 있음")
+			snackbarHostState.currentSnackbarData?.dismiss()
+			return@Button //버튼을 다시 눌러도 스낵바가 사라짐
+		}
+
+		coroutineScope.launch {
+			val result = snackbarHostState.showSnackbar(
+				"오늘도 빡코딩!",
+				"확인",
+			SnackbarDuration.Short
+			).let {
+					when (it) {
+						SnackbarResult.Dismissed -> Log.d("Tag", "스낵바 닫아짐")
+						SnackbarResult.ActionPerformed -> Log.d("Tag", "스낵바 확인 버튼 클릭")
+						}
+				}
+			}
+})
+```
