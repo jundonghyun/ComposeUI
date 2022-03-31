@@ -122,3 +122,51 @@ Button(
 			}
 })
 ```
+
+### ComposeTextFie
+
+가장 간단한 `TextField`생성방법
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e084c39f-91a3-41ed-ad41-12a63ee079e9/Untitled.png)
+
+```kotlin
+var text by remember { mutableStateOf("") }
+
+OutlinedTextField(
+	value = text,
+	onValueChange = { text = it },
+	label = { Text("아이디입력") },
+	placeholder = { Text("아이디를 입력하세요") }
+)
+```
+
+비밀번호를 입력할때 키를 보이지 않게 하기위해서는 `PasswordVisualTransformation`을 사용하면된다.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/922af5bb-d701-41c1-83bf-852170b40420/Untitled.png)
+
+```kotlin
+visualTransformation = PasswordVisualTransformation()
+```
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1f687a62-4550-4a09-b9b3-af2899bbc117/Untitled.png)
+
+위 사진처럼 아이콘을 추가하고 싶을때 앞 아이콘은 `leadingIcon` 뒤 아이콘은 `trailingIcon` 을 추가해주면 된다.
+
+```kotlin
+leadingIcon = {
+	Icon(imageVector = Icons.Default.Email, contentDescription = null)
+},
+trailingIcon = {
+	Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null)
+}
+```
+
+또한 `leadingIcon` ,`trailingIcon` 은 `@Composable` 을 받을 수 있기 때문에 버튼으로도 받을 수 있다.
+```kotlin
+IconButton(onClick = { 
+	Log.d("Tag", "체크버튼 클릭") 
+	}) {
+		Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null)
+	}
+}
+```
