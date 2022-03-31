@@ -57,7 +57,7 @@ fun MySnackBar() {
         Button(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = buttonColor(snackbarHostState.currentSnackbarData),
-                contentColor = Color.Black
+                contentColor = Color.White
             ),
             onClick = {
             Log.d("Tag", "스낵바 생성")
