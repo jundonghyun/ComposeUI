@@ -127,7 +127,7 @@ Button(
 
 가장 간단한 `TextField`생성방법
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e084c39f-91a3-41ed-ad41-12a63ee079e9/Untitled.png)
+![Untitled 4](https://user-images.githubusercontent.com/70741953/160960563-3a76bd27-7e5f-4b79-b110-9ea3a2f8d925.png)
 
 ```kotlin
 var text by remember { mutableStateOf("") }
@@ -142,13 +142,14 @@ OutlinedTextField(
 
 비밀번호를 입력할때 키를 보이지 않게 하기위해서는 `PasswordVisualTransformation`을 사용하면된다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/922af5bb-d701-41c1-83bf-852170b40420/Untitled.png)
+![Untitled 5](https://user-images.githubusercontent.com/70741953/160960586-2472d1b7-e991-4e97-b712-55ce81631577.png)
+
 
 ```kotlin
 visualTransformation = PasswordVisualTransformation()
 ```
+![Untitled 6](https://user-images.githubusercontent.com/70741953/160960599-e5eefe2e-9157-4224-9ba2-c99a3d54e886.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1f687a62-4550-4a09-b9b3-af2899bbc117/Untitled.png)
 
 위 사진처럼 아이콘을 추가하고 싶을때 앞 아이콘은 `leadingIcon` 뒤 아이콘은 `trailingIcon` 을 추가해주면 된다.
 
